@@ -1,0 +1,18 @@
+# Ignore sensitive files
+vault.yml
+*.secret
+*.key
+*.pem
+
+# Ignore temporary/system files
+*.swp
+*.bak
+*.tmp
+*~
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore Ansible roles downloaded via Galaxy
+roles/*

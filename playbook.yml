@@ -1,0 +1,29 @@
+---
+- name: Install and check Vim based on OS 
+  hosts: all
+  become: true
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: Install vim on Debian
+      apt:
+        name: vim
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install vim on RedHat
+      dnf:
+        name: vim
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Ensure vim is installed
+      command: vim --version
+      register: vim_version
+      changed_when: false  # So this doesn't show as changed every time
+      ignore_errors: true  # In case installation failed
+
+    - name: Display vim version
+      debug:
+        msg: "Vim version installed: {{ vim_version.stdout }}"
+      when: vim_version is defined and vim_version.rc == 0
