@@ -1,5 +1,6 @@
 # Ignore sensitive files
 vault.yml
+.vault_pass.txt
 *.secret
 *.key
 *.pem
